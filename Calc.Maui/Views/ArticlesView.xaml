@@ -19,6 +19,12 @@
         <CollectionView Grid.Row="1" ... />
     </Grid>
 
+<ContentPage.ToolbarItems>
+    <ToolbarItem Text="Dela" 
+                 Command="{Binding ShareAppCommand}" 
+                 Order="Primary" />
+</ContentPage.ToolbarItems>
+
 
 
     <CollectionView ItemsSource="{Binding AllArticles}">
