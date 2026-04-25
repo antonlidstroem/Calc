@@ -94,30 +94,15 @@ public partial class CalculatorViewModel : ObservableObject
         }
     }
 
-    [RelayCommand]
-    private async Task OnPlusLongPress()
+   [RelayCommand]
+private async Task OnPlusLongPress()
+{
+    if (Math.Abs(LastResult - 777) < Tolerance)
     {
-        // Unlock Logic (CRITICAL)
-        // Vi kollar LastResult istället för DisplayText för att säkerställa 
-        // att användaren faktiskt tryckt på "=" först.
-
-        if (Math.Abs(LastResult - 777) < Tolerance)
-        {
-            // TODO: Navigate to ArticlesView
-            await Shell.Current.DisplayAlert("System", "Unlocking Content...", "OK");
-        }
-        else if (Math.Abs(LastResult - 316) < Tolerance)
-        {
-            // TODO: Navigate to EditorView
-            await Shell.Current.DisplayAlert("System", "Opening Editor...", "OK");
-        }
+        await _navigationService.GoToAsync(nameof(Views.ArticlesView));
     }
-
-    #endregion
-
-    private bool EndsWithOperator()
+    else if (Math.Abs(LastResult - 316) < Tolerance)
     {
-        string last = DisplayText.Substring(DisplayText.Length - 1);
-        return last == "+" || last == "-" || last == "*" || last == "/";
+        await _navigationService.GoToAsync(nameof(Views.EditorView));
     }
 }
