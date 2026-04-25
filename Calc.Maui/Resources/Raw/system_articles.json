@@ -1,0 +1,22 @@
+{
+  "articles": [
+    {
+      "id": "s1",
+      "title": "Vikten av tystnad",
+      "category": "Filosofi",
+      "summary": "En reflektion över hur tystnad påverkar vårt inre lugn.",
+      "content": "I en värld fylld av brus är tystnad inte bara avsaknad av ljud, utan ett utrymme för reflektion...",
+      "image": "silence.png",
+      "prayer": "Ge mig styrka att finna stillhet i stormen."
+    },
+    {
+      "id": "s2",
+      "title": "Daglig rutin",
+      "category": "Hälsa",
+      "summary": "Hur små vanor skapar stora resultat över tid.",
+      "content": "Genom att repetera enkla handlingar varje morgon bygger vi en grund för disciplin...",
+      "image": "routine.png",
+      "prayer": "Tack för denna dag och de möjligheter den ger."
+    }
+  ]
+}
