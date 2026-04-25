@@ -3,6 +3,24 @@
              x:Class="Calc.App.Views.ArticlesView"
              Title="Innehåll">
     
+
+
+    <Grid RowDefinitions="Auto, *">
+        <Button Grid.Row="0" 
+                Text="!" 
+                BackgroundColor="Red" 
+                TextColor="White"
+                HeightRequest="40" 
+                WidthRequest="40"
+                HorizontalOptions="Start"
+                Margin="10"
+                Command="{Binding ResetPanicCommand}" />
+        
+        <CollectionView Grid.Row="1" ... />
+    </Grid>
+
+
+
     <CollectionView ItemsSource="{Binding AllArticles}">
         <CollectionView.ItemTemplate>
             <DataTemplate>
