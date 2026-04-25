@@ -1,1 +1,7 @@
-<Solution />
+<Solution>
+  <Project Path="Calc.Core/Calc.Core.csproj" />
+  <Project Path="Calc.Infrastructure/Calc.Infrastructure.csproj" />
+  <Project Path="Calc.Maui/Calc.Maui.csproj">
+    <Deploy Solution="Debug|*" />
+  </Project>
+</Solution>
