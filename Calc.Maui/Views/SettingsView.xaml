@@ -1,0 +1,12 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2022/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Calc.App.Views.SettingsView"
+             Title="Inställningar">
+    <VerticalStackLayout Padding="30" Spacing="20">
+        <Label Text="Välj Kalkylatorskin" FontSize="20" HorizontalOptions="Center" />
+        
+        <Button Text="Standard (Android)" Command="{Binding SetThemeCommand}" CommandParameter="Android" />
+        <Button Text="Minimalistisk (iOS)" Command="{Binding SetThemeCommand}" CommandParameter="iOS" />
+        <Button Text="Högkontrast (Samsung)" Command="{Binding SetThemeCommand}" CommandParameter="Samsung" />
+    </VerticalStackLayout>
+</ContentPage>
