@@ -1,14 +1,25 @@
 namespace Calc.App;
 
-public partial class AppShell : Shell
+public partial class App : Application
 {
-    public AppShell()
+    private readonly SecurityService _securityService;
+
+    public App(SecurityService securityService)
     {
         InitializeComponent();
+        _securityService = securityService;
+        MainPage = new AppShell();
+    }
 
-        Routing.RegisterRoute(nameof(Views.ArticlesView), typeof(Views.ArticlesView));
-        Routing.RegisterRoute(nameof(Views.ArticleDetailView), typeof(Views.ArticleDetailView));
-        Routing.RegisterRoute(nameof(Views.EditorView), typeof(Views.EditorView));
-        Routing.RegisterRoute(nameof(Views.SettingsView), typeof(Views.SettingsView));
+    protected override void OnSleep()
+    {
+        // Appen går till bakgrunden -> Aktivera panic direkt
+        _securityService.TriggerPanic().Wait();
+    }
+
+    protected override void OnResume()
+    {
+        // Säkerställ att vi är på CalculatorView när vi kommer tillbaka
+        _securityService.TriggerPanic().Wait();
     }
 }
