@@ -1,0 +1,42 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2022/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
+             xmlns:vm="clr-namespace:Calc.App.ViewModels"
+             x:Class="Calc.App.Views.CalculatorView"
+             Shell.NavBarIsVisible="False">
+
+    <Grid RowDefinitions="2*, 5*" Padding="20">
+        <Label Grid.Row="0" 
+               Text="{Binding DisplayText}" 
+               FontSize="64" 
+               HorizontalOptions="End" 
+               VerticalOptions="Center" />
+
+        <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*,*">
+            <Button Grid.Row="0" Grid.Column="0" Text="AC" Command="{Binding ClearCommand}" />
+            <Button Grid.Row="0" Grid.Column="1" Text="⌫" Command="{Binding BackspaceCommand}" />
+            <Button Grid.Row="0" Grid.Column="2" Text="%" Command="{Binding AddOperatorCommand}" CommandParameter="%" />
+            <Button Grid.Row="0" Grid.Column="3" Text="/" Command="{Binding AddOperatorCommand}" CommandParameter="/" />
+
+            <Button Grid.Row="1" Grid.Column="0" Text="7" Command="{Binding AddDigitCommand}" CommandParameter="7" />
+            <Button Grid.Row="1" Grid.Column="1" Text="8" Command="{Binding AddDigitCommand}" CommandParameter="8" />
+            <Button Grid.Row="1" Grid.Column="2" Text="9" Command="{Binding AddDigitCommand}" CommandParameter="9" />
+            <Button Grid.Row="1" Grid.Column="3" Text="*" Command="{Binding AddOperatorCommand}" CommandParameter="*" />
+
+            <Button Grid.Row="3" Grid.Column="3" Text="+" BackgroundColor="Orange">
+                <Button.Behaviors>
+                    <toolkit:TouchBehavior 
+                        LongPressDuration="3000"
+                        LongPressCommand="{Binding OnPlusLongPressCommand}" />
+                </Button.Behaviors>
+                <Button.Command>
+                    <Binding Path="AddOperatorCommand" />
+                </Button.Command>
+                <Button.CommandParameter>+</Button.CommandParameter>
+            </Button>
+
+            <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Text="=" 
+                    BackgroundColor="Green" Command="{Binding CalculateCommand}" />
+        </Grid>
+    </Grid>
+</ContentPage>
