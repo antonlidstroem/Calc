@@ -1,0 +1,35 @@
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2022/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:Calc.App.ViewModels"
+             x:Class="Calc.App.Views.EditorView"
+             Title="Hantera Innehåll">
+
+    <Grid RowDefinitions="Auto, *, Auto" Padding="15">
+        <Button Grid.Row="0" Text="!" BackgroundColor="Red" Command="{Binding ResetPanicCommand}" 
+                HorizontalOptions="Start" WidthRequest="45" HeightRequest="45" CornerRadius="22" />
+
+        <CollectionView Grid.Row="1" ItemsSource="{Binding UserArticles}" SelectionMode="Single"
+                        SelectedItem="{Binding SelectedArticle}" Margin="0,10">
+            <CollectionView.ItemTemplate>
+                <DataTemplate>
+                    <Grid ColumnDefinitions="*, Auto" Padding="10">
+                        <Label Text="{Binding Title}" VerticalOptions="Center" />
+                        <Button Grid.Column="1" Text="Radera" BackgroundColor="DarkRed" 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:EditorViewModel}}, Path=DeleteArticleCommand}"
+                                CommandParameter="{Binding .}" Scale="0.8" />
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+        <VerticalStackLayout Grid.Row="2" Spacing="5" BackgroundColor="#F0F0F0" Padding="10">
+            <Entry Placeholder="Titel" Text="{Binding CurrentArticle.Title}" />
+            <Entry Placeholder="Kategori" Text="{Binding CurrentArticle.Category}" />
+            <Editor Placeholder="Innehåll" Text="{Binding CurrentArticle.Content}" HeightRequest="80" />
+            <Entry Placeholder="Bön/Text" Text="{Binding CurrentArticle.Prayer}" />
+            
+            <Button Text="Spara Artikel" Command="{Binding SaveArticleCommand}" Margin="0,10,0,0" />
+            <Button Text="Rensa" Command="{Binding ClearFormCommand}" Visual="Material" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentPage>
