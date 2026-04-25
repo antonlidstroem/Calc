@@ -1,15 +1,14 @@
-﻿namespace Calc.Maui
-{
-    public partial class App : Application
-    {
-        public App()
-        {
-            InitializeComponent();
-        }
+namespace Calc.App;
 
-        protected override Window CreateWindow(IActivationState? activationState)
-        {
-            return new Window(new AppShell());
-        }
+public partial class AppShell : Shell
+{
+    public AppShell()
+    {
+        InitializeComponent();
+
+        Routing.RegisterRoute(nameof(Views.ArticlesView), typeof(Views.ArticlesView));
+        Routing.RegisterRoute(nameof(Views.ArticleDetailView), typeof(Views.ArticleDetailView));
+        Routing.RegisterRoute(nameof(Views.EditorView), typeof(Views.EditorView));
+        Routing.RegisterRoute(nameof(Views.SettingsView), typeof(Views.SettingsView));
     }
 }
