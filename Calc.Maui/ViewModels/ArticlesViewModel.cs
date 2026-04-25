@@ -3,6 +3,7 @@ using CommunityToolkit.Mvvm.Input;
 using Calc.Core.Interfaces;
 using Calc.Core.Models;
 using System.Collections.ObjectModel;
+using Microsoft.Maui.ApplicationModel.DataTransfer; // För Share API
 
 namespace Calc.App.ViewModels;
 
@@ -37,4 +38,21 @@ public partial class ArticlesViewModel : ObservableObject
         await _navigationService.GoToAsync(nameof(Views.ArticleDetailView), 
             new Dictionary<string, object> { { "Article", article } });
     }
+
+
+
+
+// ... i klassen ArticlesViewModel
+
+[RelayCommand]
+private async Task ShareApp()
+{
+    // Här definierar du vad som ska delas
+    await Share.Default.RequestAsync(new ShareTextRequest
+    {
+        Uri = "https://yourstealthapp.com/download",
+        Title = "Dela Calc App"
+    });
+}
+
 }
