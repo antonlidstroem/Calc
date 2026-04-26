@@ -22,4 +22,9 @@ public partial class App : Application
         // Säkerställ att vi är på CalculatorView när vi kommer tillbaka
         _securityService.TriggerPanic().Wait();
     }
+
+Routing.RegisterRoute(nameof(ArticlesView), typeof(ArticlesView));
+Routing.RegisterRoute(nameof(EditorView), typeof(EditorView));
+Routing.RegisterRoute(nameof(ArticleDetailView), typeof(ArticleDetailView));
+
 }
