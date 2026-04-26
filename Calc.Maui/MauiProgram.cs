@@ -2,11 +2,11 @@ using CommunityToolkit.Maui;
 using Calc.Core.Interfaces;
 using Calc.Infrastructure.Services;
 using Calc.Infrastructure.Repositories;
-using Calc.App.ViewModels;
-using Calc.App.Views;
-using Calc.App.Services;
+using Calc.Maui.ViewModels;
+using Calc.Maui.Views;
+using Calc.Maui.Services;
 
-namespace Calc.App;
+namespace Calc.Maui;
 
 public static class MauiProgram
 {
@@ -22,23 +22,22 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
             });
 
-        // 1. Register Infrastructure Services
+        // 1. Core & Infrastructure
         builder.Services.AddSingleton<FileService>();
         builder.Services.AddSingleton<ICalculatorService, CalculatorService>();
         builder.Services.AddSingleton<IArticleRepository, ArticleRepository>();
         builder.Services.AddSingleton<SecurityService>();
 
-        // 2. Register App Services
+        // 2. App Services
         builder.Services.AddSingleton<INavigationService, NavigationService>();
 
-        // 3. Register ViewModels
+        // 3. ViewModels
         builder.Services.AddTransient<CalculatorViewModel>();
         builder.Services.AddTransient<ArticlesViewModel>();
         builder.Services.AddTransient<SettingsViewModel>();
         builder.Services.AddTransient<EditorViewModel>();
-        // ArticleDetail is handled by QueryProperty, but VM registration helps if needed
 
-        // 4. Register Views
+        // 4. Views
         builder.Services.AddTransient<CalculatorView>();
         builder.Services.AddTransient<ArticlesView>();
         builder.Services.AddTransient<SettingsView>();

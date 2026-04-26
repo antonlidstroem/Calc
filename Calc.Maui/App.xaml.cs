@@ -1,7 +1,7 @@
-using Calc.App.Services;
-using Calc.App.Views;
+using Calc.Maui.Services;
+using Calc.Maui.Views;
 
-namespace Calc.App;
+namespace Calc.Maui;
 
 public partial class App : Application
 {

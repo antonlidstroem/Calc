@@ -1,6 +1,6 @@
-using Calc.App.ViewModels;
+using Calc.Maui.ViewModels;
 
-namespace Calc.App.Views;
+namespace Calc.Maui.Views;
 
 public partial class SettingsView : ContentPage
 {

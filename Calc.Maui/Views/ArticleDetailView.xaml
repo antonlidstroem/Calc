@@ -1,6 +1,6 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2022/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Calc.App.Views.ArticleDetailView"
+             x:Class="Calc.Maui.Views.ArticleDetailView"
              Title="Detaljer">
     <ScrollView Padding="20">
         <VerticalStackLayout Spacing="15">

@@ -5,7 +5,7 @@ using Calc.Core.Interfaces;
 using System.Collections.ObjectModel;
 using Calc.Infrastructure.Services;
 
-namespace Calc.App.ViewModels;
+namespace Calc.Maui.ViewModels;
 
 public partial class EditorViewModel : BaseSecurityViewModel
 {

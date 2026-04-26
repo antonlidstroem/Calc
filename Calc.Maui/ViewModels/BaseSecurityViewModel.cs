@@ -1,3 +1,9 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Calc.Infrastructure.Services;
+
+namespace Calc.Maui.ViewModels;
+
 public partial class BaseSecurityViewModel : ObservableObject
 {
     protected readonly SecurityService SecurityService;
@@ -5,7 +11,7 @@ public partial class BaseSecurityViewModel : ObservableObject
     public BaseSecurityViewModel(SecurityService securityService)
     {
         SecurityService = securityService;
-        SecurityService.ResetTimer(); // Starta timern när vyn laddas
+        SecurityService.ResetTimer();
     }
 
     [RelayCommand]

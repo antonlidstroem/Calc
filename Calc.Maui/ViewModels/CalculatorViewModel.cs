@@ -1,11 +1,11 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Calc.Core.Interfaces;
-using Calc.App.Services;
+using Calc.Maui.Services;
 using Calc.Infrastructure.Services;
 using System.Globalization;
 
-namespace Calc.App.ViewModels;
+namespace Calc.Maui.ViewModels;
 
 public partial class CalculatorViewModel : ObservableObject
 {

@@ -2,6 +2,7 @@ using Calc.Core.Interfaces;
 using Calc.Core.Models;
 using Calc.Infrastructure.Services;
 using System.Text.Json;
+using Microsoft.Maui.Storage;
 
 namespace Calc.Infrastructure.Repositories;
 
@@ -11,7 +12,7 @@ public class ArticleRepository : IArticleRepository
     private readonly SecurityService _securityService;
     private readonly string _userFilePath;
     private const string SystemFileName = "system_articles.json";
-    private const string UserFileName = "user_articles.enc"; // Vi byter ändelse för att markera kryptering
+    private const string UserFileName = "user_articles.enc";
 
     public ArticleRepository(FileService fileService, SecurityService securityService)
     {

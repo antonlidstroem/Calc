@@ -1,8 +1,8 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2022/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:toolkit="http://schemas.microsoft.com/dotnet/2022/maui/toolkit"
-             xmlns:vm="clr-namespace:Calc.App.ViewModels"
-             x:Class="Calc.App.Views.CalculatorView"
+             xmlns:vm="clr-namespace:Calc.Maui.ViewModels"
+             x:Class="Calc.Maui.Views.CalculatorView"
              Shell.NavBarIsVisible="False">
 
     <Grid RowDefinitions="2*, 5*" Padding="20">

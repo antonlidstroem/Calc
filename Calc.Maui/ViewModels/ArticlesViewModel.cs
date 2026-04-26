@@ -6,16 +6,16 @@ using Calc.Infrastructure.Services;
 using System.Collections.ObjectModel;
 using Microsoft.Maui.ApplicationModel.DataTransfer;
 
-namespace Calc.App.ViewModels;
+namespace Calc.Maui.ViewModels;
 
 public partial class ArticlesViewModel : BaseSecurityViewModel
 {
     private readonly IArticleRepository _repository;
-    private readonly Services.INavigationService _navigationService;
+    private readonly INavigationService _navigationService;
 
     public ObservableCollection<Article> AllArticles { get; } = new();
 
-    public ArticlesViewModel(IArticleRepository repository, Services.INavigationService navigationService, SecurityService securityService) 
+    public ArticlesViewModel(IArticleRepository repository, INavigationService navigationService, SecurityService securityService) 
         : base(securityService)
     {
         _repository = repository;

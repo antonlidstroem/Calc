@@ -1,20 +1,24 @@
+using CommunityToolkit.Mvvm.ComponentModel;
+using CommunityToolkit.Mvvm.Input;
+using Microsoft.Maui.Storage;
+
+namespace Calc.Maui.ViewModels;
+
 public partial class SettingsViewModel : ObservableObject
 {
     [RelayCommand]
     public void SetTheme(string themeName)
     {
-        ResourceDictionary theme;
-        switch (themeName)
+        ResourceDictionary theme = themeName switch
         {
-            case "iOS": theme = new Theme_iOS(); break;
-            case "Samsung": theme = new Theme_Samsung(); break;
-            default: theme = new Theme_Android(); break;
-        }
+            "iOS" => new Theme_IOS(),
+            "Samsung" => new Theme_Samsung(),
+            _ => new Theme_Android()
+        };
 
-        Application.Current.Resources.MergedDictionaries.Clear();
+        Application.Current!.Resources.MergedDictionaries.Clear();
         Application.Current.Resources.MergedDictionaries.Add(theme);
-        
-        // Spara valet
+
         Preferences.Set("SelectedTheme", themeName);
     }
 }

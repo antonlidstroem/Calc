@@ -1,4 +1,6 @@
-namespace Calc.App.Services;
+using Calc.Core.Interfaces;
+
+namespace Calc.Maui.Services;
 
 public class NavigationService : INavigationService
 {

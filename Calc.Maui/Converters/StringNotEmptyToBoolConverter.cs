@@ -1,6 +1,6 @@
 using System.Globalization;
 
-namespace Calc.App;
+namespace Calc.Maui;
 
 public class StringNotEmptyToBoolConverter : IValueConverter
 {

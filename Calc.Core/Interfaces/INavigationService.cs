@@ -1,4 +1,4 @@
-namespace Calc.App.Services;
+﻿namespace Calc.Core.Interfaces;
 
 public interface INavigationService
 {
