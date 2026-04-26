@@ -12,7 +12,6 @@ public class SecurityService
     {
         _navigationService = navigationService;
         
-        // MAUI Timer som körs på UI-tråden
         _panicTimer = Application.Current.Dispatcher.CreateTimer();
         _panicTimer.Interval = TimeSpan.FromSeconds(TimeoutSeconds);
         _panicTimer.Tick += async (s, e) => await TriggerPanic();
@@ -29,7 +28,7 @@ public class SecurityService
     public async Task TriggerPanic()
     {
         _panicTimer.Stop();
-        // Navigera alltid tillbaka till kalkylatorn och rensa stacken
-        await Shell.Current.GoToAsync("//CalculatorView");
+        // Updated route to //MainPage to match AppShell.xaml
+        await Shell.Current.GoToAsync("//MainPage");
     }
 }
