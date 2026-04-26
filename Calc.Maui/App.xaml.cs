@@ -1,4 +1,4 @@
-using Calc.Maui.Services;
+using Calc.Infrastructure.Services;
 using Calc.Maui.Views;
 
 namespace Calc.Maui;
@@ -10,14 +10,13 @@ public partial class App : Application
     public App(SecurityService securityService)
     {
         InitializeComponent();
-
         _securityService = securityService;
 
-        RegisterRoutes();
-
+        RegisterRoutes(); // Denna anropas här...
         MainPage = new AppShell();
     }
 
+    // ...så den måste finnas här:
     private void RegisterRoutes()
     {
         Routing.RegisterRoute(nameof(ArticlesView), typeof(ArticlesView));

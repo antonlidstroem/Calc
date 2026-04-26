@@ -1,3 +1,4 @@
+using Calc.Maui.Resources.Styles; 
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Microsoft.Maui.Storage;
