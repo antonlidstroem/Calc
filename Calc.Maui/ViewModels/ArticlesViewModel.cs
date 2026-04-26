@@ -2,19 +2,21 @@ using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Calc.Core.Interfaces;
 using Calc.Core.Models;
+using Calc.Infrastructure.Services;
 using System.Collections.ObjectModel;
-using Microsoft.Maui.ApplicationModel.DataTransfer; // För Share API
+using Microsoft.Maui.ApplicationModel.DataTransfer;
 
 namespace Calc.App.ViewModels;
 
-public partial class ArticlesViewModel : ObservableObject
+public partial class ArticlesViewModel : BaseSecurityViewModel
 {
     private readonly IArticleRepository _repository;
     private readonly Services.INavigationService _navigationService;
 
     public ObservableCollection<Article> AllArticles { get; } = new();
 
-    public ArticlesViewModel(IArticleRepository repository, Services.INavigationService navigationService)
+    public ArticlesViewModel(IArticleRepository repository, Services.INavigationService navigationService, SecurityService securityService) 
+        : base(securityService)
     {
         _repository = repository;
         _navigationService = navigationService;
@@ -30,6 +32,8 @@ public partial class ArticlesViewModel : ObservableObject
 
         foreach (var a in system.Concat(user))
             AllArticles.Add(a);
+            
+        SecurityService.ResetTimer();
     }
 
     [RelayCommand]
@@ -39,20 +43,13 @@ public partial class ArticlesViewModel : ObservableObject
             new Dictionary<string, object> { { "Article", article } });
     }
 
-
-
-
-// ... i klassen ArticlesViewModel
-
-[RelayCommand]
-private async Task ShareApp()
-{
-    // Här definierar du vad som ska delas
-    await Share.Default.RequestAsync(new ShareTextRequest
+    [RelayCommand]
+    private async Task ShareApp()
     {
-        Uri = "https://yourstealthapp.com/download",
-        Title = "Dela Calc App"
-    });
-}
-
+        await Share.Default.RequestAsync(new ShareTextRequest
+        {
+            Uri = "https://yourstealthapp.com/download",
+            Title = "Dela Calc App"
+        });
+    }
 }
