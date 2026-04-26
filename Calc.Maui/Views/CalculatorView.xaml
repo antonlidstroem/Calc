@@ -13,15 +13,29 @@
                VerticalOptions="Center" />
 
         <Grid Grid.Row="1" ColumnDefinitions="*,*,*,*" RowDefinitions="*,*,*,*,*">
+            
+            <!-- Row 0 -->
             <Button Grid.Row="0" Grid.Column="0" Text="AC" Command="{Binding ClearCommand}" />
             <Button Grid.Row="0" Grid.Column="1" Text="⌫" Command="{Binding BackspaceCommand}" />
             <Button Grid.Row="0" Grid.Column="2" Text="%" Command="{Binding AddOperatorCommand}" CommandParameter="%" />
             <Button Grid.Row="0" Grid.Column="3" Text="/" Command="{Binding AddOperatorCommand}" CommandParameter="/" />
 
+            <!-- Row 1 -->
             <Button Grid.Row="1" Grid.Column="0" Text="7" Command="{Binding AddDigitCommand}" CommandParameter="7" />
             <Button Grid.Row="1" Grid.Column="1" Text="8" Command="{Binding AddDigitCommand}" CommandParameter="8" />
             <Button Grid.Row="1" Grid.Column="2" Text="9" Command="{Binding AddDigitCommand}" CommandParameter="9" />
             <Button Grid.Row="1" Grid.Column="3" Text="*" Command="{Binding AddOperatorCommand}" CommandParameter="*" />
+
+            <!-- Row 2 -->
+            <Button Grid.Row="2" Grid.Column="0" Text="4" Command="{Binding AddDigitCommand}" CommandParameter="4" />
+            <Button Grid.Row="2" Grid.Column="1" Text="5" Command="{Binding AddDigitCommand}" CommandParameter="5" />
+            <Button Grid.Row="2" Grid.Column="2" Text="6" Command="{Binding AddDigitCommand}" CommandParameter="6" />
+            <Button Grid.Row="2" Grid.Column="3" Text="-" Command="{Binding AddOperatorCommand}" CommandParameter="-" />
+
+            <!-- Row 3 -->
+            <Button Grid.Row="3" Grid.Column="0" Text="1" Command="{Binding AddDigitCommand}" CommandParameter="1" />
+            <Button Grid.Row="3" Grid.Column="1" Text="2" Command="{Binding AddDigitCommand}" CommandParameter="2" />
+            <Button Grid.Row="3" Grid.Column="2" Text="3" Command="{Binding AddDigitCommand}" CommandParameter="3" />
 
             <Button Grid.Row="3" Grid.Column="3" Text="+" BackgroundColor="Orange">
                 <Button.Behaviors>
@@ -35,6 +49,9 @@
                 <Button.CommandParameter>+</Button.CommandParameter>
             </Button>
 
+            <!-- Row 4 -->
+            <Button Grid.Row="4" Grid.Column="0" Text="0" Command="{Binding AddDigitCommand}" CommandParameter="0" />
+            <Button Grid.Row="4" Grid.Column="1" Text="." Command="{Binding AddDigitCommand}" CommandParameter="." />
             <Button Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="2" Text="=" 
                     BackgroundColor="Green" Command="{Binding CalculateCommand}" />
         </Grid>
