@@ -11,11 +11,11 @@ public partial class App : Application
         MainPage = new AppShell();
     }
 
-    protected override void OnSleep()
-    {
-        // Appen går till bakgrunden -> Aktivera panic direkt
-        _securityService.TriggerPanic().Wait();
-    }
+    protected override async void OnSleep()
+{
+    await _securityService.TriggerPanic();
+}
+
 
     protected override void OnResume()
     {
