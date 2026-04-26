@@ -1,21 +1,33 @@
-﻿using System.Text.Json;
+using System.Text.Json;
 
 namespace Calc.Infrastructure.Services;
 
 public class FileService
 {
-    public async Task<T?> ReadJsonAsync<T>(string filePath)
+    public async Task<T?> ReadEncryptedJsonAsync<T>(string filePath, string key)
     {
         if (!File.Exists(filePath)) return default;
 
-        using var stream = File.OpenRead(filePath);
-        return await JsonSerializer.DeserializeAsync<T>(stream);
+        try
+        {
+            var encryptedData = await File.ReadAllTextAsync(filePath);
+            var decryptedJson = EncryptionService.Decrypt(encryptedData, key);
+            
+            if (string.IsNullOrEmpty(decryptedJson)) return default;
+            
+            return JsonSerializer.Deserialize<T>(decryptedJson);
+        }
+        catch
+        {
+            return default;
+        }
     }
 
-    public async Task WriteJsonAsync<T>(string filePath, T data)
+    public async Task WriteEncryptedJsonAsync<T>(string filePath, T data, string key)
     {
-        using var stream = File.Create(filePath);
-        await JsonSerializer.SerializeAsync(stream, data, new JsonSerializerOptions { WriteIndented = true });
+        var json = JsonSerializer.Serialize(data, new JsonSerializerOptions { WriteIndented = true });
+        var encryptedData = EncryptionService.Encrypt(json, key);
+        await File.WriteAllTextAsync(filePath, encryptedData);
     }
 
     public async Task<string> ReadAssetAsync(string fileName)
