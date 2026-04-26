@@ -1,6 +1,7 @@
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Calc.Core.Interfaces;
+using Calc.App.Services;
 using System.Globalization;
 
 namespace Calc.App.ViewModels;
@@ -8,6 +9,7 @@ namespace Calc.App.ViewModels;
 public partial class CalculatorViewModel : ObservableObject
 {
     private readonly ICalculatorService _calculatorService;
+    private readonly INavigationService _navigationService;
     private bool _isNewEntry = true;
     private const double Tolerance = 0.0001;
 
@@ -17,12 +19,11 @@ public partial class CalculatorViewModel : ObservableObject
     [ObservableProperty]
     private double _lastResult;
 
-    public CalculatorViewModel(ICalculatorService calculatorService)
+    public CalculatorViewModel(ICalculatorService calculatorService, INavigationService navigationService)
     {
         _calculatorService = calculatorService;
+        _navigationService = navigationService;
     }
-
-    #region Commands
 
     [RelayCommand]
     private void AddDigit(string digit)
@@ -41,7 +42,6 @@ public partial class CalculatorViewModel : ObservableObject
     [RelayCommand]
     private void AddOperator(string op)
     {
-        // Förhindra dubbla operatorer
         if (!string.IsNullOrEmpty(DisplayText) && !EndsWithOperator())
         {
             DisplayText += op;
@@ -49,12 +49,20 @@ public partial class CalculatorViewModel : ObservableObject
         }
     }
 
+    private bool EndsWithOperator()
+    {
+        return DisplayText.EndsWith("+") || DisplayText.EndsWith("-") || 
+               DisplayText.EndsWith("*") || DisplayText.EndsWith("/");
+    }
+
     [RelayCommand]
     private void AddDecimal()
     {
-        // Enkel validering för att inte lägga till flera punkter i samma tal
-        // I en produktion-app bör man splitta på operatorer och kolla sista segmentet
-        if (!DisplayText.EndsWith("."))
+        // Split by operators to find the current segment being typed
+        var parts = DisplayText.Split('+', '-', '*', '/');
+        var currentPart = parts[^1];
+
+        if (!currentPart.Contains("."))
         {
             DisplayText += ".";
             _isNewEntry = false;
@@ -65,7 +73,7 @@ public partial class CalculatorViewModel : ObservableObject
     private void Backspace()
     {
         if (DisplayText.Length > 1)
-            DisplayText = DisplayText.Substring(0, DisplayText.Length - 1);
+            DisplayText = DisplayText[..^1];
         else
             DisplayText = "0";
     }
@@ -94,15 +102,16 @@ public partial class CalculatorViewModel : ObservableObject
         }
     }
 
-   [RelayCommand]
-private async Task OnPlusLongPress()
-{
-    if (Math.Abs(LastResult - 777) < Tolerance)
+    [RelayCommand]
+    private async Task OnPlusLongPress()
     {
-        await _navigationService.GoToAsync(nameof(Views.ArticlesView));
-    }
-    else if (Math.Abs(LastResult - 316) < Tolerance)
-    {
-        await _navigationService.GoToAsync(nameof(Views.EditorView));
+        if (Math.Abs(LastResult - 777) < Tolerance)
+        {
+            await _navigationService.GoToAsync(nameof(Views.ArticlesView));
+        }
+        else if (Math.Abs(LastResult - 316) < Tolerance)
+        {
+            await _navigationService.GoToAsync(nameof(Views.EditorView));
+        }
     }
 }
