@@ -1,4 +1,15 @@
-<ShellContent
-    Title="Calculator"
-    ContentTemplate="{DataTemplate local:CalculatorView}"
-    Route="MainPage" /> 
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Calc.App.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:Calc.App.Views"
+    Title="Calc.Maui"
+    FlyoutBehavior="Disabled">
+
+    <ShellContent
+        Title="Calculator"
+        ContentTemplate="{DataTemplate views:CalculatorView}"
+        Route="MainPage" />
+
+</Shell>
