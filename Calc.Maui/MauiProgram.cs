@@ -15,7 +15,7 @@ public static class MauiProgram
         var builder = MauiApp.CreateBuilder();
         builder
             .UseMauiApp<App>()
-            .UseMauiCommunityToolkit() // VIKTIGT för TouchBehavior
+            .UseMauiCommunityToolkit()
             .ConfigureFonts(fonts =>
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
@@ -35,12 +35,15 @@ public static class MauiProgram
         builder.Services.AddTransient<CalculatorViewModel>();
         builder.Services.AddTransient<ArticlesViewModel>();
         builder.Services.AddTransient<SettingsViewModel>();
-        // EditorViewModel och DetailViewModel registreras på samma sätt
+        builder.Services.AddTransient<EditorViewModel>();
+        // ArticleDetail is handled by QueryProperty, but VM registration helps if needed
 
         // 4. Register Views
         builder.Services.AddTransient<CalculatorView>();
         builder.Services.AddTransient<ArticlesView>();
         builder.Services.AddTransient<SettingsView>();
+        builder.Services.AddTransient<EditorView>();
+        builder.Services.AddTransient<ArticleDetailView>();
 
         return builder.Build();
     }
