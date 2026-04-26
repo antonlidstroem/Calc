@@ -1,23 +1,59 @@
-<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2022/maui"
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Calc.Maui.Views.ArticleDetailView"
-             Title="Detaljer">
-    <ScrollView Padding="20">
-        <VerticalStackLayout Spacing="15">
-            <Label Text="{Binding Article.Title}" FontSize="28" FontAttributes="Bold" />
-            <Label Text="{Binding Article.Category}" FontSize="14" TextColor="Gray" />
-            
-            <Image Source="{Binding Article.Image}" 
-                   HeightRequest="200" 
-                   Aspect="AspectFill"
-                   IsVisible="{Binding Article.Image, Converter={StaticResource StringNotEmptyConverter}}" />
+             xmlns:vm="clr-namespace:Calc.Maui.ViewModels"
+             xmlns:models="clr-namespace:Calc.Core.Models;assembly=Calc.Core"
+             x:Class="Calc.Maui.Views.ArticlesView"
+             Title="Innehåll"
+             BackgroundColor="{DynamicResource CalcBackground}">
 
-            <Label Text="{Binding Article.Content}" FontSize="16" LineHeight="1.5" />
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Dela" 
+                     Command="{Binding ShareAppCommand}" 
+                     Order="Primary" />
+    </ContentPage.ToolbarItems>
 
-            <BoxView HeightRequest="1" Color="LightGray" Margin="0,10" />
+    <Grid RowDefinitions="Auto, *">
+        <Button Grid.Row="0" 
+                Text="!" 
+                BackgroundColor="Red" 
+                TextColor="White"
+                HeightRequest="44" 
+                WidthRequest="44"
+                CornerRadius="22"
+                HorizontalOptions="Start"
+                Margin="15,10"
+                Command="{Binding ResetPanicCommand}" />
 
-            <Label Text="Reflektion/Bön" FontSize="18" FontAttributes="Italic" />
-            <Label Text="{Binding Article.Prayer}" FontSize="16" FontAttributes="Italic" TextColor="#555" />
-        </VerticalStackLayout>
-    </ScrollView>
+        <CollectionView Grid.Row="1" 
+                        ItemsSource="{Binding AllArticles}"
+                        SelectionMode="None">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="models:Article">
+                    <Frame Margin="10,5" 
+                           Padding="15" 
+                           BorderColor="Transparent"
+                           HasShadow="True"
+                           BackgroundColor="{DynamicResource DisplayColor}">
+                        <VerticalStackLayout Spacing="5">
+                            <Label Text="{Binding Title}" 
+                                   FontSize="20" 
+                                   FontAttributes="Bold"
+                                   TextColor="{DynamicResource DisplayText}" />
+                            <Label Text="{Binding Summary}" 
+                                   MaxLines="2" 
+                                   TextColor="{DynamicResource DisplayText}"
+                                   Opacity="0.8" />
+                        </VerticalStackLayout>
+
+                        <Frame.GestureRecognizers>
+                            <TapGestureRecognizer 
+                                Command="{Binding Source={RelativeSource AncestorType={x:Type vm:ArticlesViewModel}}, Path=SelectArticleCommand}" 
+                                CommandParameter="{Binding .}" />
+                        </Frame.GestureRecognizers>
+                    </Frame>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+    </Grid>
 </ContentPage>

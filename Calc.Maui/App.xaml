@@ -11,9 +11,6 @@
                 <styles:Theme_Android />
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Theme_Android.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Theme_IOS.xaml" />
-                <ResourceDictionary Source="Resources/Styles/Theme_Samsung.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <local:StringNotEmptyToBoolConverter x:Key="StringNotEmptyConverter" />

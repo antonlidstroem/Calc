@@ -10,23 +10,32 @@ public class CalculatorService : ICalculatorService
     {
         if (string.IsNullOrWhiteSpace(input)) return 0;
 
+        // Spara undan ursprunglig kultur för att återställa den senare
+        var originalCulture = Thread.CurrentThread.CurrentCulture;
+
         try
         {
-            // Replace % with /100. 
-            // Note: This performs simple division (e.g., 50% -> 0.5)
-            string sanitizedInput = input.Replace("%", "/100");
+            // Sanera input: Ersätt % med /100 och se till att kommatecken blir punkter
+            string sanitizedInput = input.Replace("%", "/100").Replace(",", ".");
 
             var dt = new DataTable();
-            // Force InvariantCulture to handle "." correctly in all regions
+
+            // Tvinga InvariantCulture under själva beräkningen
             Thread.CurrentThread.CurrentCulture = CultureInfo.InvariantCulture;
-            
+
             var result = dt.Compute(sanitizedInput, "");
 
             return Convert.ToDouble(result, CultureInfo.InvariantCulture);
         }
         catch
         {
-            return 0; 
+            // Vid fel i uträkningen (t.ex. division med noll), returnera 0
+            return 0;
+        }
+        finally
+        {
+            // Återställ alltid kulturen så att resten av appen inte påverkas
+            Thread.CurrentThread.CurrentCulture = originalCulture;
         }
     }
 }
